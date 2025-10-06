@@ -1,0 +1,9 @@
+# Archivos compilados de C++
+*.exe
+
+# Archivos de IDE/Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
