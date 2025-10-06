@@ -1,5 +1,10 @@
 # Archivos compilados de C++
 *.exe
+*.obj
+*.pdb
+Debug/
+Release/
+x64/
 
 # Archivos de IDE/Editores
 .vscode/
@@ -7,3 +12,13 @@
 *.swp
 *.swo
 *~
+
+#Usuario
+*.suo
+*.user
+*.VC.db
+*.cache
+*.sdf
+*.ipch
+*.tlog
+*.log
