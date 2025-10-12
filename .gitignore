@@ -5,6 +5,11 @@
 Debug/
 Release/
 x64/
+.sln
+.filters
+.user
+.vcxproj
+
 
 # Archivos de IDE/Editores
 .vscode/
