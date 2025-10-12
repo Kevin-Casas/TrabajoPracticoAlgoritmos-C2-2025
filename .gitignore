@@ -8,6 +8,7 @@ x64/
 
 # Archivos de IDE/Editores
 .vscode/
+.vs/
 .idea/
 *.swp
 *.swo
