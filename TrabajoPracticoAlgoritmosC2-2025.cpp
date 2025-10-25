@@ -1,11 +1,55 @@
 // TrabajoPracticoAlgoritmosC2-2025.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
 
+#include "ArbolCentroCapacidad.h"
+#include "ArbolCentroEmpleados.h"
+#include "ArbolCentroPaquetes.h"
 #include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    //Ingreso de centros desde el archivo centros.txt
+    fstream archivoCentros;
+    archivoCentros.open("centros.txt", ios::in);
+    if(archivoCentros.is_open()) {
+        string linea;
+        while (getline(archivoCentros, linea))
+        {
+            /* code */
+        }
+        archivoCentros.close();
+    }
+
+    //Ingreso de envios desde el archivo envios.txt
+    fstream archivoEnvios;
+    archivoEnvios.open("envios.txt", ios::in);
+    if(archivoEnvios.is_open()) {
+        string linea;
+        while (getline(archivoEnvios, linea))
+        {
+            /* code */
+        }
+        archivoEnvios.close();
+    }
+
+    //Ingreso de conexiones desde el archivo envios.txt
+    fstream archivoConexiones;
+    archivoConexiones.open("conexiones.txt", ios::in);
+    if(archivoConexiones.is_open()) {
+        string linea;
+        while (getline(archivoConexiones, linea))
+        {
+            /* code */
+        }
+        archivoConexiones.close();
+    }
+
+
+
+    cout << "Hello World!\n";
 }
 
 // Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
