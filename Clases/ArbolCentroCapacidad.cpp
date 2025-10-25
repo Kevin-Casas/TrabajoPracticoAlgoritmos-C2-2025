@@ -33,7 +33,7 @@ void ArbolCentroCapacidad::mostrarInorden(NodoCentro *nodo) const
   }
 
   mostrarInorden(nodo->izquierdo);
-  cout << nodo->datos.codigo << " " << nodo->datos.nombre << " " << nodo->datos.ciudad << " " << nodo->datos.capacidad << " " << nodo->datos.paquetes_diarios << " " << nodo->datos.empleados << endl;
+  cout << nodo->datos.codigo << " " << nodo->datos.nombre << " " << nodo->datos.ciudad << " " << nodo->datos.capacidad << endl;
   mostrarInorden(nodo->derecho);
 }
 
