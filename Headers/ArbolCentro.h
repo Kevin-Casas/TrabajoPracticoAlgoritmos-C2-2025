@@ -9,7 +9,9 @@ private:
   void insertarNodoCapacidad(NodoCentro *&nodo, const Centro &centro);
   void insertarNodoEmpleados(NodoCentro *&nodo, const Centro &centro);
   void insertarNodoPaquetes(NodoCentro *&nodo, const Centro &centro);
-  void mostrarInorden(NodoCentro *nodo) const;
+  void mostrarInordenCapacidad(NodoCentro *nodo) const;
+  void mostrarInordenEmpleados(NodoCentro *nodo) const;
+  void mostrarInordenPaquetes(NodoCentro *nodo) const;
   void eliminarArbol(NodoCentro *nodo);
 
 public:

@@ -66,7 +66,7 @@ void ArbolCentro::insertarNodoPaquetes(NodoCentro *&nodo, const Centro &centroAI
   }
 }
 
-void ArbolCentro::mostrarInorden(NodoCentro *nodo) const
+void ArbolCentro::mostrarInordenCapacidad(NodoCentro *nodo) const
 {
 
   if (nodo == nullptr)
@@ -74,9 +74,35 @@ void ArbolCentro::mostrarInorden(NodoCentro *nodo) const
     return;
   }
 
-  mostrarInorden(nodo->izquierdo);
+  mostrarInordenCapacidad(nodo->izquierdo);
   cout << nodo->datos.codigo << " " << nodo->datos.nombre << " " << nodo->datos.ciudad << " " << nodo->datos.capacidad << endl;
-  mostrarInorden(nodo->derecho);
+  mostrarInordenCapacidad(nodo->derecho);
+}
+
+void ArbolCentro::mostrarInordenEmpleados(NodoCentro *nodo) const
+{
+
+  if (nodo == nullptr)
+  {
+    return;
+  }
+
+  mostrarInordenEmpleados(nodo->izquierdo);
+  cout << nodo->datos.codigo << " " << nodo->datos.nombre << " " << nodo->datos.ciudad << " " << nodo->datos.empleados << endl;
+  mostrarInordenEmpleados(nodo->derecho);
+}
+
+void ArbolCentro::mostrarInordenPaquetes(NodoCentro *nodo) const
+{
+
+  if (nodo == nullptr)
+  {
+    return;
+  }
+
+  mostrarInordenPaquetes(nodo->izquierdo);
+  cout << nodo->datos.codigo << " " << nodo->datos.nombre << " " << nodo->datos.ciudad << " " << nodo->datos.paquetes_diarios << endl;
+  mostrarInordenPaquetes(nodo->derecho);
 }
 
 ArbolCentro::~ArbolCentro() {

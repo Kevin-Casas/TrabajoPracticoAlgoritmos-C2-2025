@@ -7,6 +7,11 @@ using namespace std;
 
 int main()
 {
+
+    ArbolCentro arbolCapacidad;
+    ArbolCentro arbolEmpleados;
+    ArbolCentro arbolPaquetes;
+    
     //Ingreso de centros desde el archivo centros.txt
     fstream archivoCentros;
     archivoCentros.open("centros.txt", ios::in);
