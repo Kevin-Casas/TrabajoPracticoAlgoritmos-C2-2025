@@ -1,13 +1,15 @@
 // TrabajoPracticoAlgoritmosC2-2025.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 #include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\ArbolCentro.h"
+#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\TablaDeHashing.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 using namespace std;
 
 int main()
 {
-
+    
     ArbolCentro arbolCapacidad;
     ArbolCentro arbolEmpleados;
     ArbolCentro arbolPaquetes;
@@ -19,7 +21,28 @@ int main()
         string linea;
         while (getline(archivoCentros, linea))
         {
-            /* code */
+            //Ignora lineas vacias
+            if(linea.empty()) continue;
+
+            stringstream ss(linea);
+
+            //Toma los valores int como string para evitar errores
+            string codigo, nombre, ciudad, capacidad, paquetes_diarios, empleados;
+
+            getline(ss, codigo, ' ');
+            getline(ss, nombre, ' ');
+            getline(ss, ciudad, ' ');
+            getline(ss, capacidad, ' ');
+            getline(ss, paquetes_diarios, ' ');
+            getline(ss, empleados, ' ');
+
+            //Convierte a int para constructor
+            int capacidadInt = stoi(capacidad);
+            int paquetes_diariosInt = stoi(paquetes_diarios);
+            int empleadosInt = stoi(empleados);
+
+            Centro centro(codigo, nombre, ciudad, capacidadInt, paquetes_diariosInt, empleadosInt);
+
         }
         archivoCentros.close();
     }
