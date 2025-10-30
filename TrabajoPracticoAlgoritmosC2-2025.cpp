@@ -1,6 +1,9 @@
 // TrabajoPracticoAlgoritmosC2-2025.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 #include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\ArbolCentro.h"
 #include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\TablaDeHashing.h"
+#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\Centro.h"
+#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\Envio.h"
+#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\Conexion.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -9,7 +12,7 @@ using namespace std;
 
 int main()
 {
-    
+
     ArbolCentro arbolCapacidad;
     ArbolCentro arbolEmpleados;
     ArbolCentro arbolPaquetes;
@@ -42,7 +45,6 @@ int main()
             int empleadosInt = stoi(empleados);
 
             Centro centro(codigo, nombre, ciudad, capacidadInt, paquetes_diariosInt, empleadosInt);
-
         }
         archivoCentros.close();
     }
@@ -54,7 +56,25 @@ int main()
         string linea;
         while (getline(archivoEnvios, linea))
         {
-            /* code */
+            //Ignora lineas vacias
+            if(linea.empty()) continue;
+
+            stringstream ss(linea);
+            
+            string codigo_centro, paquete_id, cliente_id, fecha_dia, peso;
+
+            getline(ss, codigo_centro, ' ');
+            getline(ss, paquete_id, ' ');
+            getline(ss, cliente_id, ' ');
+            getline(ss, fecha_dia, ' ');
+            getline(ss, peso, ' ');
+
+            int paquete_idNum = stoi(paquete_id);
+            int cliente_idNum = stoi(cliente_id);
+            int fecha_diaNum = stoi(fecha_dia);
+            float pesoNum = stoi(peso);
+
+            Envio envio(codigo_centro, paquete_idNum, cliente_idNum, fecha_diaNum, pesoNum);
         }
         archivoEnvios.close();
     }
@@ -66,7 +86,20 @@ int main()
         string linea;
         while (getline(archivoConexiones, linea))
         {
-            /* code */
+            //Ignora lineas vacias
+            if(linea.empty()) continue;
+
+            stringstream ss(linea);
+            
+            string centro_origen, centro_destino, distancia;
+
+            getline(ss, centro_origen, ' ');
+            getline(ss, centro_destino, ' ');
+            getline(ss, distancia, ' ');
+
+            int distanciaNum = stoi(distancia);
+
+            Conexion conexion(centro_origen, centro_destino, distanciaNum);
         }
         archivoConexiones.close();
     }
