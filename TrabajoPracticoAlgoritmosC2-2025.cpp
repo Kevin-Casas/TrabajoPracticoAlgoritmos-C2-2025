@@ -1,9 +1,9 @@
 // TrabajoPracticoAlgoritmosC2-2025.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\ArbolCentro.h"
-#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\TablaDeHashing.h"
-#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\Centro.h"
-#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\Envio.h"
-#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\Conexion.h"
+#include "./Headers/ArbolCentro.h"
+#include "./Headers/TablaDeHashing.h"
+#include "./Headers/Centro.h"
+#include "./Headers/Envio.h"
+#include "./Headers/Conexion.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
