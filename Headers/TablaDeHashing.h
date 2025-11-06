@@ -38,8 +38,9 @@ public:
     for (int i = 0; i < tamanoDeTabla; i++)
     {
 
-      //Funcion de colision cuadratica
-      int posicion = (codigoHash + 1 * i + 1 * i * i) % tamanoDeTabla;
+      // Funcion de colision cuadratica
+      // Se eligio la funcion cuadratica por simplicidad y mejor dispersion comparada con la lineal
+      int posicion = ((codigoHash + (i * i)) % tamanoDeTabla);
 
       if (!tablaDeHash[posicion].estaOcupado || tablaDeHash[posicion].fueBorrado)
       {
@@ -51,5 +52,31 @@ public:
         cout << "Centro insertado" << endl;
       }
     }
+  };
+
+  void mostrarCentro(const string &codigo)
+  {
+
+    int codigoHash = crearCodigo(codigo);
+
+    for (int i = 0; i < tamanoDeTabla; i++)
+    {
+
+      int posicion = ((codigoHash + (i * i)) % tamanoDeTabla);
+      if (!tablaDeHash[posicion].estaOcupado && tablaDeHash[posicion].fueBorrado)
+      {
+        continue;
+      }
+      else if (tablaDeHash[posicion].estaOcupado && tablaDeHash[posicion].centro.codigo == codigo)
+      {
+        cout << "Nombre " << tablaDeHash[posicion].centro.nombre << endl;
+        cout << "Ciudad " << tablaDeHash[posicion].centro.ciudad << endl;
+        cout << "Capacidad " << tablaDeHash[posicion].centro.capacidad << endl;
+        cout << "Paquetes diarios " << tablaDeHash[posicion].centro.paquetes_diarios << endl;
+        cout << "Empleados " << tablaDeHash[posicion].centro.empleados << endl;
+        return;
+      };
+    }; 
+    cout << "Centro no encontrado" << endl;
   };
 };
