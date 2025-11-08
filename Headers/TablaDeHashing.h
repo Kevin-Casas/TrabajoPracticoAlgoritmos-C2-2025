@@ -79,4 +79,23 @@ public:
     }; 
     cout << "Centro no encontrado" << endl;
   };
+
+  void eliminarCentro(const string &codigo) {
+
+    int codigoHash = crearCodigo(codigo);
+
+    for(int i = 0; i < tamanoDeTabla; i++) {
+      int posicion = ((codigoHash + (i * i)) % tamanoDeTabla);
+
+      if(!tablaDeHash[posicion].estaOcupado && !tablaDeHash[posicion].fueBorrado) {
+        cout << "Centro no encontrado" << endl;
+      }
+      if(tablaDeHash[posicion].estaOcupado && tablaDeHash[posicion].centro.codigo == codigo) {
+        tablaDeHash[posicion].estaOcupado = false;
+        tablaDeHash[posicion].fueBorrado = true;
+        tamanoDeTabla--;
+        cout << "Centro eliminado" << endl;
+      }
+    }
+  };
 };
