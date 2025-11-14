@@ -1,1 +1,1 @@
-#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\Conexion.h"
+#include "../Headers/Conexion.h"

@@ -1,4 +1,4 @@
-#include "C:\Users\Kevin\Documents\Unahur\Algoritmos\TP\TrabajoPracticoAlgoritmosC2-2025\Headers\ArbolCentro.h"
+#include "../Headers/ArbolCentro.h"
 #include <iostream>
 
 using namespace std;
