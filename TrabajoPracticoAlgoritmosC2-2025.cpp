@@ -132,8 +132,12 @@ int main()
             cout << "Ingrese los empleados del centro" << endl;
             cin >> empleados;
             Centro centro(codigo, nombre, ciudad, capacidad, paquetes_diarios, empleados);
+            arbolCapacidad.insertarPorCapacidad(centro);
+            arbolEmpleados.insertarPorEmpleados(centro);
+            arbolPaquetes.insertarPorPaquetes(centro);
             tablaHash.insertarCentro(centro);
             tablaHash.mostrarCentro(codigo);
+            grafo.agregarCentro(centro);
             break;
         }
         case 3:
