@@ -10,4 +10,7 @@ struct LugarEnTabla {
 
   LugarEnTabla(Centro centro, bool estaOcupado, bool fueBorrado)
     : centro(centro), estaOcupado(estaOcupado), fueBorrado(fueBorrado) {}
+
+  //Constructor especial para inicializar la tabla
+  LugarEnTabla() : centro("", "", "", 0, 0, 0), estaOcupado(false), fueBorrado(false) {}
 };

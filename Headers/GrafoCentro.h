@@ -32,25 +32,33 @@ class GrafoCentro {
     matrizDeAdyacencias[centroOrigenClave].push_back({centroDestinoClave, conexion.distancia});
   }
 
-  vector<int> caminoMinimo(const string& codigo) {
+  vector<int> caminoMinimo(const string& codigoOrigen, const string& codigoDestino) {
 
     int cantidadDeCentros = centros.size();
-    int centroInicialClave = claves[codigo];
+    int centroOrigenClave = claves[codigoOrigen];
+    int centroDestinoClave = claves[codigoDestino];
 
     vector<int> distancias(cantidadDeCentros, 9999);
-    distancias[centroInicialClave] = 0;
+    vector<int> centrosVisitados(cantidadDeCentros, -1);
+
+    distancias[centroOrigenClave] = 0;
 
 
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> colaDePrioridad;
 
-    colaDePrioridad.push({0, centroInicialClave});
+    colaDePrioridad.push({0, centroOrigenClave});
 
     while(!colaDePrioridad.empty()) {
 
       auto colaTop = colaDePrioridad.top();
+
       int distanciaActual = colaTop.first;
       int centroActual = colaTop.second;
       colaDePrioridad.pop();
+
+      if (centroActual == centroDestinoClave) {
+        break;
+      }
 
       if(distanciaActual > distancias[centroActual]) {
         continue;
@@ -64,24 +72,37 @@ class GrafoCentro {
         if (distancias[centroActual] + distanciaConexion < distancias[centroAdyacente]) {
 
           distancias[centroAdyacente] = distancias[centroActual] + distanciaConexion;
+          centrosVisitados[centroAdyacente] = centroActual;
           colaDePrioridad.push({distancias[centroAdyacente], centroAdyacente});
         }
       }
     }
-    return distancias;
+
+    vector<int> caminoMinimo;
+    if(distancias[centroDestinoClave] == 9999) {
+      return caminoMinimo;
+    }
+
+    //Se guarda el recorrido hasta el centro origen en formato de pila y se lo da vuelta para devolver en orden de recorrido
+    for (int nodo = centroDestinoClave; nodo != -1; nodo = centrosVisitados[nodo]) {
+      caminoMinimo.push_back(nodo);
+    }
+    reverse(caminoMinimo.begin(), caminoMinimo.end());
+    return caminoMinimo;
   }
 
-  void mostrarCaminoMinimo(const string& codigo) {
-    vector<int> distancias = caminoMinimo(codigo);
+  void mostrarCaminoMinimo(const string& codigoOrigen, const string& codigoDestino) {
+    vector<int> caminoADestino = caminoMinimo(codigoOrigen, codigoDestino);
 
-    for(int i = 0; i < distancias.size(); i++) {
+    if (caminoADestino.empty()) {
+      cout << "No hay conexion entre los centros seleccionados" << endl;
+      return;
+    } else {
+      cout << "Camino minimo desde " << codigoOrigen << " " << "hasta " << codigoDestino << endl;
 
-      if (distancias[i] == 9999) {
-        cout << "No hay conexion a centro" << " " << centros[i].codigo << endl;
-      } else {
-        cout << centros[i].codigo << " " << distancias[i] << endl;
+      for (int i = 0; i < caminoADestino.size(); i++) {
+        cout << centros[caminoADestino[i]].codigo << endl;
       }
     }
   }
-
 };

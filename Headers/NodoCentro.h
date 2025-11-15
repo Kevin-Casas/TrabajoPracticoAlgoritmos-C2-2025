@@ -5,10 +5,10 @@
 struct NodoCentro
 {
   Centro datos;
-  NodoCentro *izquierdo;
-  NodoCentro *derecho;
+  NodoCentro* izquierdo;
+  NodoCentro* derecho;
 
   //Constructor 
   NodoCentro(const Centro &nuevoCentro)
-      : datos(nuevoCentro) {}
+      : datos(nuevoCentro), izquierdo(nullptr), derecho(nullptr) {}
 };

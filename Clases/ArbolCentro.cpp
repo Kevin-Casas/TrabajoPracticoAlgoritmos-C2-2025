@@ -121,11 +121,12 @@ ArbolCentro::~ArbolCentro() {
 }
 
 //Eliminamos el arbol para liberar la memoria
-void ArbolCentro::eliminarArbol(NodoCentro* nodo) {
+void ArbolCentro::eliminarArbol(NodoCentro* &nodo) {
   if (nodo == nullptr) {
     return;
   }
   eliminarArbol(nodo->izquierdo);
   eliminarArbol(nodo->derecho);
   delete nodo;
+  nodo = nullptr;
 }

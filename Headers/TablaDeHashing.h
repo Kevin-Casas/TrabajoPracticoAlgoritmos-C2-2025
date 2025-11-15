@@ -8,12 +8,13 @@ class TablaDeHashing
 {
 
 private:
-  vector<LugarEnTabla> tablaDeHash;
 
   // Se asume que ZZZ es el valor de clave maximo y por lo tanto el factor de carga 0.8 seria 338
   int tamanoDeTabla = 338;
-
   int lugaresOcupados = 0;
+
+  //Se agregan valores por defecto
+  vector<LugarEnTabla> tablaDeHash;
 
   int crearCodigo(const string &codigoDeCentro) const
   {
@@ -30,6 +31,9 @@ private:
   }
 
 public:
+
+  TablaDeHashing() : tablaDeHash(tamanoDeTabla) {}
+
   void insertarCentro(const Centro &centro)
   {
 
@@ -50,6 +54,7 @@ public:
         lugaresOcupados++;
 
         cout << "Centro insertado" << endl;
+        return;
       }
     }
   };
@@ -93,9 +98,11 @@ public:
       if(tablaDeHash[posicion].estaOcupado && tablaDeHash[posicion].centro.codigo == codigo) {
         tablaDeHash[posicion].estaOcupado = false;
         tablaDeHash[posicion].fueBorrado = true;
-        tamanoDeTabla--;
+        lugaresOcupados--;
         cout << "Centro eliminado" << endl;
+        return;
       }
     }
+    cout << "Centro no encontrado" << endl;
   };
 };

@@ -12,6 +12,8 @@
 #include <string>
 using namespace std;
 
+
+
 int main()
 {
 
@@ -20,58 +22,42 @@ int main()
     ArbolCentro arbolPaquetes;
     TablaDeHashing tablaHash;
     GrafoCentro grafo;
-    
-    //Ingreso de centros desde el archivo centros.txt
+
+
+
+    // Ingreso de centros desde el archivo centros.txt
     fstream archivoCentros;
     archivoCentros.open("centros.txt", ios::in);
-    if(archivoCentros.is_open()) {
-        string linea;
-        while (getline(archivoCentros, linea))
+    if (archivoCentros.is_open())
+    {
+        string codigo, nombre, ciudad;
+        int capacidad, paquetes_diarios, empleados;
+        while (archivoCentros >> codigo >> nombre >> ciudad >> capacidad >> paquetes_diarios >> empleados)
         {
-            //Ignora lineas vacias
-            if(linea.empty()) continue;
-
-            stringstream ss(linea);
-
-            //Toma los valores int como string para evitar errores
-            string codigo, nombre, ciudad, capacidad, paquetes_diarios, empleados;
-
-            getline(ss, codigo, ' ');
-            getline(ss, nombre, ' ');
-            getline(ss, ciudad, ' ');
-            getline(ss, capacidad, ' ');
-            getline(ss, paquetes_diarios, ' ');
-            getline(ss, empleados, ' ');
-
-            //Convierte a int para constructor
-            int capacidadInt = stoi(capacidad);
-            int paquetes_diariosInt = stoi(paquetes_diarios);
-            int empleadosInt = stoi(empleados);
-
-            Centro centro(codigo, nombre, ciudad, capacidadInt, paquetes_diariosInt, empleadosInt);
-
+            Centro centro(codigo, nombre, ciudad, capacidad, paquetes_diarios, empleados);
             arbolCapacidad.insertarPorCapacidad(centro);
             arbolEmpleados.insertarPorEmpleados(centro);
             arbolPaquetes.insertarPorPaquetes(centro);
             tablaHash.insertarCentro(centro);
             grafo.agregarCentro(centro);
-
         }
         archivoCentros.close();
     }
 
-    //Ingreso de envios desde el archivo envios.txt
+    // Ingreso de envios desde el archivo envios.txt
     fstream archivoEnvios;
     archivoEnvios.open("envios.txt", ios::in);
-    if(archivoEnvios.is_open()) {
+    if (archivoEnvios.is_open())
+    {
         string linea;
         while (getline(archivoEnvios, linea))
         {
-            //Ignora lineas vacias
-            if(linea.empty()) continue;
+            // Ignora lineas vacias
+            if (linea.empty())
+                continue;
 
             stringstream ss(linea);
-            
+
             string codigo_centro, paquete_id, cliente_id, fecha_dia, peso;
 
             getline(ss, codigo_centro, ' ');
@@ -90,36 +76,101 @@ int main()
         archivoEnvios.close();
     }
 
-    //Ingreso de conexiones desde el archivo envios.txt
+    // Ingreso de conexiones desde el archivo envios.txt
     fstream archivoConexiones;
     archivoConexiones.open("conexiones.txt", ios::in);
-    if(archivoConexiones.is_open()) {
-        string linea;
-        while (getline(archivoConexiones, linea))
+    if (archivoConexiones.is_open())
+    {
+        string centro_origen, centro_destino;
+        int distancia;
+        while (archivoConexiones >> centro_origen >> centro_destino >> distancia)
         {
-            //Ignora lineas vacias
-            if(linea.empty()) continue;
-
-            stringstream ss(linea);
-            
-            string centro_origen, centro_destino, distancia;
-
-            getline(ss, centro_origen, ' ');
-            getline(ss, centro_destino, ' ');
-            getline(ss, distancia, ' ');
-
-            int distanciaNum = stoi(distancia);
-
-            Conexion conexion(centro_origen, centro_destino, distanciaNum);
+            Conexion conexion(centro_origen, centro_destino, distancia);
             grafo.agregarConexion(conexion);
         }
         archivoConexiones.close();
     }
 
+    int opcion = 10;
 
+    while (opcion != 0)
+    {
 
+        cout << "Opcion 1 para mostrar centro especifico" << endl;
+        cout << "Opcion 2 para agregar un centro nuevo" << endl;
+        cout << "Opcion 3 para eliminar un centro" << endl;
+        cout << "Opcion 4 para mostrar todos los centros por capacidad" << endl;
+        cout << "Opcion 5 para mostrar todos los centros por empleados" << endl;
+        cout << "Opcion 6 para mostrar todos los centros por paquetes" << endl;
+        cout << "Opcion 7 para mostrar el camino minimo de un centro a otro" << endl;
+        cout << "Opcion 0 para terminar el programa" << endl;
+        cin >> opcion;
+        cin.ignore();
 
-    cout << "Hello World!\n";
+        string codigo, nombre, ciudad;
+        int capacidad, paquetes_diarios, empleados;
+
+        switch (opcion)
+        {
+        case 1:
+            cout << "Ingrese codigo de centro" << endl;
+            cin >> codigo;
+            tablaHash.mostrarCentro(codigo);
+            break;
+        case 2:
+        {
+            cout << "Ingrese el codigo del centro nuevo" << endl;
+            cin >> codigo;
+            cout << "Ingrese el nombre del centro nuevo" << endl;
+            cin >> nombre;
+            cout << "Ingrese la ciudad del centro nuevo" << endl;
+            cin >> ciudad;
+            cout << "Ingrese la capacidad del centro nuevo" << endl;
+            cin >> capacidad;
+            cout << "Ingrese los paquetes diarios del centro" << endl;
+            cin >> paquetes_diarios;
+            cout << "Ingrese los empleados del centro" << endl;
+            cin >> empleados;
+            Centro centro(codigo, nombre, ciudad, capacidad, paquetes_diarios, empleados);
+            tablaHash.insertarCentro(centro);
+            tablaHash.mostrarCentro(codigo);
+            break;
+        }
+        case 3:
+            cout << "Ingrese el codigo del centro a eliminar" << endl;
+            cin >> codigo;
+            tablaHash.eliminarCentro(codigo);
+            break;
+        case 4:
+            arbolCapacidad.mostrarInordenCapacidad(arbolCapacidad.raiz);
+            break;
+        case 5:
+            arbolEmpleados.mostrarInordenEmpleados(arbolEmpleados.raiz);
+            break;
+        case 6:
+            arbolPaquetes.mostrarInordenPaquetes(arbolPaquetes.raiz);
+            break;
+        case 7:
+        {
+            string codigoDestino;
+            cout << "Ingrese el codigo del centro origen" << endl;
+            cin >> codigo;
+            cout << "Ingrese el codigo del centro destino" << endl;
+            cin >> codigoDestino;
+            grafo.mostrarCaminoMinimo(codigo, codigoDestino);
+            break;
+        }
+        case 0:
+            arbolCapacidad.eliminarArbol(arbolCapacidad.raiz);
+            arbolEmpleados.eliminarArbol(arbolEmpleados.raiz);
+            arbolPaquetes.eliminarArbol(arbolPaquetes.raiz);
+            break;
+        default:
+            cout << "Opcion incorrecta" << endl;
+        }
+    }
+
+   // cout << "Hello World!\n";
 }
 
 // Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
