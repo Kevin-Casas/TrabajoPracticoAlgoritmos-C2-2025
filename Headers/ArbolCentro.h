@@ -15,6 +15,12 @@ private:
   void eliminarArbol(NodoCentro *nodo);
 
 public:
+
+  ArbolCentro() : raiz(nullptr) {}
+
+  void insertarPorCapacidad(const Centro& centro);
+  void insertarPorEmpleados(const Centro& centro);
+  void insertarPorPaquetes(const Centro& centro);
   void mostrarInorden() const;
   
   ~ArbolCentro();

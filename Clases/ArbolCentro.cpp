@@ -36,12 +36,12 @@ void ArbolCentro::insertarNodoEmpleados(NodoCentro *&nodo, const Centro &centroA
   }
   else if (centroAInsertar.empleados <= nodo->datos.empleados)
   {
-    insertarNodoCapacidad(nodo->izquierdo, centroAInsertar);
+    insertarNodoEmpleados(nodo->izquierdo, centroAInsertar);
     // Caso contrario se guarda en el nodo derecho
   }
   else
   {
-    insertarNodoCapacidad(nodo->derecho, centroAInsertar);
+    insertarNodoEmpleados(nodo->derecho, centroAInsertar);
   }
 }
 
@@ -57,12 +57,12 @@ void ArbolCentro::insertarNodoPaquetes(NodoCentro *&nodo, const Centro &centroAI
   }
   else if (centroAInsertar.paquetes_diarios <= nodo->datos.paquetes_diarios)
   {
-    insertarNodoCapacidad(nodo->izquierdo, centroAInsertar);
+    insertarNodoPaquetes(nodo->izquierdo, centroAInsertar);
     // Caso contrario se guarda en el nodo derecho
   }
   else
   {
-    insertarNodoCapacidad(nodo->derecho, centroAInsertar);
+    insertarNodoPaquetes(nodo->derecho, centroAInsertar);
   }
 }
 
@@ -103,6 +103,17 @@ void ArbolCentro::mostrarInordenPaquetes(NodoCentro *nodo) const
   mostrarInordenPaquetes(nodo->izquierdo);
   cout << nodo->datos.codigo << " " << nodo->datos.nombre << " " << nodo->datos.ciudad << " " << nodo->datos.paquetes_diarios << endl;
   mostrarInordenPaquetes(nodo->derecho);
+}
+
+//Para correjir error al ingresar centros desde .txt
+void ArbolCentro::insertarPorCapacidad(const Centro& centro) {
+  insertarNodoCapacidad(raiz, centro);
+}
+void ArbolCentro::insertarPorEmpleados(const Centro& centro) {
+  insertarNodoEmpleados(raiz, centro);
+}
+void ArbolCentro::insertarPorPaquetes(const Centro& centro) {
+  insertarNodoPaquetes(raiz, centro);
 }
 
 ArbolCentro::~ArbolCentro() {

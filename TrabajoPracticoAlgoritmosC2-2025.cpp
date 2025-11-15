@@ -1,9 +1,11 @@
 // TrabajoPracticoAlgoritmosC2-2025.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-#include "./Headers/ArbolCentro.h"
 #include "./Headers/TablaDeHashing.h"
 #include "./Headers/Centro.h"
 #include "./Headers/Envio.h"
 #include "./Headers/Conexion.h"
+#include "./Headers/GrafoCentro.h"
+#include "./Headers/ArbolCentro.h"
+#include "./Headers/NodoCentro.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -16,6 +18,8 @@ int main()
     ArbolCentro arbolCapacidad;
     ArbolCentro arbolEmpleados;
     ArbolCentro arbolPaquetes;
+    TablaDeHashing tablaHash;
+    GrafoCentro grafo;
     
     //Ingreso de centros desde el archivo centros.txt
     fstream archivoCentros;
@@ -45,6 +49,13 @@ int main()
             int empleadosInt = stoi(empleados);
 
             Centro centro(codigo, nombre, ciudad, capacidadInt, paquetes_diariosInt, empleadosInt);
+
+            arbolCapacidad.insertarPorCapacidad(centro);
+            arbolEmpleados.insertarPorEmpleados(centro);
+            arbolPaquetes.insertarPorPaquetes(centro);
+            tablaHash.insertarCentro(centro);
+            grafo.agregarCentro(centro);
+
         }
         archivoCentros.close();
     }
@@ -100,9 +111,11 @@ int main()
             int distanciaNum = stoi(distancia);
 
             Conexion conexion(centro_origen, centro_destino, distanciaNum);
+            grafo.agregarConexion(conexion);
         }
         archivoConexiones.close();
     }
+
 
 
 

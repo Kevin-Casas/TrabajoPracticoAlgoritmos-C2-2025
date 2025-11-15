@@ -47,18 +47,23 @@ class GrafoCentro {
 
     while(!colaDePrioridad.empty()) {
 
-      auto [distancia, centroActual] = colaDePrioridad.top();
+      auto colaTop = colaDePrioridad.top();
+      int distanciaActual = colaTop.first;
+      int centroActual = colaTop.second;
       colaDePrioridad.pop();
 
-      if(distancia > distancias[centroActual]) {
+      if(distanciaActual > distancias[centroActual]) {
         continue;
       }
 
-      for (auto [centroAdyacente, distancia] : matrizDeAdyacencias[centroActual]) {
+      for (const auto& par : matrizDeAdyacencias[centroActual]) {
 
-        if (distancias[centroActual] + distancia < distancias[centroAdyacente]) {
-          distancias[centroAdyacente] = distancias[centroActual] + distancia;
+        int centroAdyacente = par.first;
+        int distanciaConexion = par.second;
 
+        if (distancias[centroActual] + distanciaConexion < distancias[centroAdyacente]) {
+
+          distancias[centroAdyacente] = distancias[centroActual] + distanciaConexion;
           colaDePrioridad.push({distancias[centroAdyacente], centroAdyacente});
         }
       }
