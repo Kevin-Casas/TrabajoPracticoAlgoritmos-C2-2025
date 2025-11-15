@@ -136,7 +136,6 @@ int main()
             arbolEmpleados.insertarPorEmpleados(centro);
             arbolPaquetes.insertarPorPaquetes(centro);
             tablaHash.insertarCentro(centro);
-            tablaHash.mostrarCentro(codigo);
             grafo.agregarCentro(centro);
             break;
         }
