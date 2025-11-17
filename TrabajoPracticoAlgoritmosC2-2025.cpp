@@ -49,29 +49,12 @@ int main()
     archivoEnvios.open("envios.txt", ios::in);
     if (archivoEnvios.is_open())
     {
-        string linea;
-        while (getline(archivoEnvios, linea))
-        {
-            // Ignora lineas vacias
-            if (linea.empty())
-                continue;
-
-            stringstream ss(linea);
-
-            string codigo_centro, paquete_id, cliente_id, fecha_dia, peso;
-
-            getline(ss, codigo_centro, ' ');
-            getline(ss, paquete_id, ' ');
-            getline(ss, cliente_id, ' ');
-            getline(ss, fecha_dia, ' ');
-            getline(ss, peso, ' ');
-
-            int paquete_idNum = stoi(paquete_id);
-            int cliente_idNum = stoi(cliente_id);
-            int fecha_diaNum = stoi(fecha_dia);
-            float pesoNum = stoi(peso);
-
-            Envio envio(codigo_centro, paquete_idNum, cliente_idNum, fecha_diaNum, pesoNum);
+        string codigo_centro;
+        int paquete_id, cliente_id, fecha_dia;
+        float peso;
+        while (archivoEnvios >> codigo_centro >> paquete_id >> cliente_id >> fecha_dia >> peso)
+        {          
+            Envio envio(codigo_centro, paquete_id, cliente_id, fecha_dia, peso);
         }
         archivoEnvios.close();
     }
